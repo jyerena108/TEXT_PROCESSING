@@ -25,7 +25,11 @@ df.head()
 # Frequency of Tokens:
 
 #Create dataset:
-text=" ".join(df["COMMENT"])
+
+#there are rows with missing comments we exclude those missing values and create long string
+ex=['nan']
+text=" ".join(w for w in df["COMMENT"].astype(str) if w not in ex )
+#tokenize
 words = text.split()
 
 # Auxiliary function:
@@ -42,3 +46,4 @@ def get_n_most_common(n, list_of_words,type='count'):
 
 #Top N frequency of words
 get_n_most_common(1,words,'freq')
+
